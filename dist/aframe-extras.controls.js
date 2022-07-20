@@ -1449,7 +1449,9 @@ module.exports = AFRAME.registerComponent('movement-controls', {
 
   init: function init() {
     var el = this.el;
-
+    if (!this.data.camera) {
+      this.data.camera = el.querySelector('[camera]');
+    }
     this.velocityCtrl = null;
 
     this.velocity = new THREE.Vector3();
@@ -1610,6 +1612,7 @@ module.exports = AFRAME.registerComponent('movement-controls', {
           vector2.set(dVelocity.x, dVelocity.z);
           vector2.setLength(factor * this.data.speed * 16.66667);
           velocity.x = vector2.x;
+          velocity.y = 0;
           velocity.z = vector2.y;
         }
       }
